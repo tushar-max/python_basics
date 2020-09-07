@@ -25,4 +25,8 @@ Com este mês a estudar os fundamentos espero poder chegar ao final e sentir que
 * Na hora de almoço ler e sublinhar
 * A tarde ler e sublinhar, pesquisar mais informação para sedimentar informação.
 
+# Bibliografia
 
+https://automatetheboringstuff.com/
+
+https://www.fca.pt/pt/catalogo/informatica/programacao/programacao-em-python/
