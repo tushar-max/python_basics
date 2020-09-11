@@ -100,6 +100,7 @@ You can cause the program to terminate, or exit, before the last instruction by 
 The print() function has the optional parameters end and sep to specify what should be printed at the end of its arguments and between its arguments (separating them), respectively.
 
     >>> print('%s Wins, %s Losses, %s Ties' % (wins, losses, ties))
+    >>> print(f"{wins} Wins, {losses} Losses, {ties} Ties")
     >>> print('Hello', end='')
     >>> print('cats', 'dogs', 'mice', sep=',')
     cats,dogs,mice
@@ -358,4 +359,246 @@ The first argument passed to the method is the key to check for, and the second 
     'black'
     >>> spam
     {'color': 'black', 'age': 5, 'name': 'Pooka'}
+
+### Escape Character
+
+| Escape Character | Prints as |
+| --- | --- |
+| \'  | Single Quote |
+| \"  | Double Quote |
+| \t  | Tab  |
+| \n  | Newline(line break) |
+| \\  | Backslash  | 
+
+
+### Raw Strings
+
+You can place an r before the beginning quotation mark of a string to make it a raw string. A raw string completely ignores all escape characters and prints any backslash that appears in the string. 
+
+    >>> print(r'That is Carol\'s cat.')
+    That is Carol\'s cat.
+
+Raw strings are helpful if you are typing string values that contain many backslashes, such as the strings used for Windows file paths like r'C:\Users\Al\Desktop' 
+
+
+### The isX() Methods
+
+* isalpha() Returns True if the string consists only of letters and isn’t blank
+* isalnum() Returns True if the string consists only of letters and numbers and is not blank
+* isdecimal() Returns True if the string consists only of numeric characters and is not blank
+* isspace() Returns True if the string consists only of spaces, tabs, and newlines and is not blank
+* istitle() Returns True if the string consists only of words that begin with an uppercase letter followed by only lowercase letters
+
+### The startswith() and endswith() Methods
+
+The startswith() and endswith() methods return True if the string value they are called on begins or ends (respectively) with the string passed to the method; otherwise, they return False. Enter the following into the interactive shell:
+
+    >>> 'Hello, world!'.startswith('Hello')
+    True
+    >>> 'Hello, world!'.endswith('world!')
+    True
+
+### join() and split() Mehtods
+
+The join() method is useful when you have a list of strings that need to be joined together into a single string value. The join() method is called on a string, gets passed a list of strings, and returns a string.
+
+    >>> ', '.join(['cats', 'rats', 'bats'])
+    'cats, rats, bats'
+    >>> ' '.join(['My', 'name', 'is', 'Simon'])
+    'My name is Simon'
+
+The split() method does the opposite: It’s called on a string value and returns a list of strings. 
+
+### Splitting Strings with the partition() method
+
+The partition() string method can split a string into the text before and after a separator string. This method searches the string it is called on for the separator string it is passed, and returns a tuple of three substrings for the “before,” “separator,” and “after” substrings.
+
+    >>> 'Hello, world!'.partition('w')
+    ('Hello, ', 'w', 'orld!')
+    >>> 'Hello, world!'.partition('world')
+    ('Hello, ', 'world', '!')
+
+If the separator string you pass to partition() occurs multiple times in the string that partition() calls on, the method splits the string only on the first occurrence.
+
+### Removing Whitespace with the strip()
+
+The strip() string method will return a new string without any whitespace characters at the beginning or end. 
+
+    >>> spam = '    Hello, World    '
+    >>> spam.strip()
+    'Hello, World'
+
+Optionally, a string argument will specify which characters on the ends should be stripped. Enter the following into the interactive shell:
+
+    >>> spam = 'SpamSpamBaconSpamEggsSpamSpam'
+    >>> spam.strip('ampS')
+    'BaconSpamEggs'
+
+Passing strip() the argument 'ampS' will tell it to strip occurrences of a, m, p, and capital S from the ends of the string stored in spam. The order of the characters in the string passed to strip() does not matter: strip('ampS') will do the same thing as strip('mapS') or strip('Spam').
+
+### ord() and chr() methods
+
+You can use the ord() function to get the code point of a one-character string, and the chr() function to get the one-character string of an integer code point.
+
+    >>> ord('!')
+    33
+    >>> chr(65)
+    'A'
+
+### Copying and Pasting Strings with the pyperclip Module
+
+The pyperclip module has copy() and paste() functions that can send text to and receive text from your computer’s clipboard. Sending the output of your program to the clipboard will make it easy to paste it into an email, word processor, or some other software.
+
+    >>> import pyperclip
+    >>> pyperclip.copy('Hello, world!')
+    >>> pyperclip.paste()
+    'Hello, world!'
+
+### Running script out of the IDLE
+
+On Windows, you can create a batch file to run this program with the WIN-R Run window. (For more about batch files, see Appendix B.) Enter the following into the file editor and save the file as mclip.bat in the C:\Windows folder:
+
+@py.exe C:\path_to_file\mclip.py %*
+@pause
+
+With this batch file created, running the multi-clipboard program on Windows is just a matter of pressing WIN-R and typing mclip key phrase.
+
+
+### Regular Expressions (Regex)
+
+See file automate_boring_stuff\exercicies\regex.py
+
+While there are several steps to using regular expressions in Python, each step is fairly simple.
+
+Import the regex module with import re.
+Create a Regex object with the re.compile() function. (Remember to use a raw string.)
+Pass the string you want to search into the Regex object’s search() method. This returns a Match object.
+Call the Match object’s group() method to return a string of the actual matched text.
+
+The \( and \) escape characters in the raw string passed to re.compile() will match actual parenthesis characters. In regular expressions, the following characters have special meanings:
+
+    .  ^  $  *  +  ?  {  }  [  ]  \  |  (  )
+
+You can think of the ? as saying, “Match zero or one of the group preceding this question mark.”
+
+While * means “match zero or more,” the + (or plus) means “match one or more.” Unlike the star, which does not require its group to appear in the matched string, the group preceding a plus must appear at least once. 
+
+Python’s regular expressions are greedy by default, which means that in ambiguous situations they will match the longest string possible. The non-greedy (also called lazy) version of the braces, which matches the shortest string possible, has the closing brace followed by a question mark.
+
+    >>> greedyHaRegex = re.compile(r'(Ha){3,5}')
+    >>> mo1 = greedyHaRegex.search('HaHaHaHaHa')
+    >>> mo1.group()
+    'HaHaHaHaHa'
+
+    >>> nongreedyHaRegex = re.compile(r'(Ha){3,5}?')
+    >>> mo2 = nongreedyHaRegex.search('HaHaHaHaHa')
+    >>> mo2.group()
+    'HaHaHa'
+
+Note that the question mark can have two meanings in regular expressions: declaring a non-greedy match or flagging an optional group. These meanings are entirely unrelated.
+
+#### findall() Method
+
+To summarize what the findall() method returns, remember the following:
+
+* When called on a regex with no groups, such as \d\d\d-\d\d\d-\d\d\d\d, the method findall() returns a list of string matches, such as ['415-555-9999', '212-555-0000'].
+* When called on a regex that has groups, such as (\d\d\d)-(\d\d\d)-(\d\d\d\d), the method findall() returns a list of tuples of strings (one string for each group), such as [('415', '555', '9999'), ('212', '555', '0000')].
+
+### Character Classes
+
+![characther_class](/automate_boring_stuff\images\characters_class.png)
+
+The character class [0-5] will match only the numbers 0 to 5; this is much shorter than typing (0|1|2|3|4|5). Note that while \d matches digits and \w matches digits, letters, and the underscore, there is no shorthand character class that matches only letters. (Though you can use the [a-zA-Z] character class, as explained next.)
+
+You can also include ranges of letters or numbers by using a hyphen. For example, the character class [a-zA-Z0-9] will match all lowercase letters, uppercase letters, and numbers.
+
+Note that inside the square brackets, the normal regular expression symbols are not interpreted as such. This means you do not need to escape the ., *, ?, or () characters with a preceding backslash.
+
+By placing a caret character (^) just after the character class’s opening bracket, you can make a negative character class.
+
+You can also use the caret symbol (^) at the start of a regex to indicate that a match must occur at the beginning of the searched text. Likewise, you can put a dollar sign ($) at the end of the regex to indicate the string must end with this regex pattern. And you can use the ^ and $ together to indicate that the entire string must match the regex—that is, it’s not enough for a match to be made on some subset of the string.
+
+I always confuse the meanings of these two symbols, so I use the mnemonic “Carrots cost dollars” to remind myself that the caret comes first and the dollar sign comes last.
+
+The . (or dot) character in a regular expression is called a wildcard and will match any character except for a newline.
+
+#### Matching Everything with Dot-Star
+
+Sometimes you will want to match everything and anything. For example, say you want to match the string 'First Name:', followed by any and all text, followed by 'Last Name:', and then followed by anything again. You can use the dot-star (.*) to stand in for that “anything.”
+
+    >>> nameRegex = re.compile(r'First Name: (.*) Last Name: (.*)')
+    >>> mo = nameRegex.search('First Name: Al Last Name: Sweigart')
+    >>> mo.group(1)
+    'Al'
+    >>> mo.group(2)
+    'Sweigart'
+
+#### Matching Newlines with the Dot Character
+
+The dot-star will match everything except a newline. By passing re.DOTALL as the second argument to re.compile(), you can make the dot character match all characters, including the newline character.
+
+    >>> newlineRegex = re.compile('.*', re.DOTALL)
+    >>> newlineRegex.search('Serve the public trust.\nProtect the innocent.
+    \nUphold the law.').group()
+    'Serve the public trust.\nProtect the innocent.\nUphold the law.'
+
+#### Review of Regex Symbols
+
+This chapter covered a lot of notation, so here’s a quick review of what you learned about basic regular expression syntax:
+
+* The ? matches zero or one of the preceding group.
+* The * matches zero or more of the preceding group.
+* The + matches one or more of the preceding group.
+* The {n} matches exactly n of the preceding group.
+* The {n,} matches n or more of the preceding group.
+* The {,m} matches 0 to m of the preceding group.
+* The {n,m} matches at least n and at most m of the preceding group.
+* {n,m}? or *? or +? performs a non-greedy match of the preceding group.
+* ^spam means the string must begin with spam.
+* spam$ means the string must end with spam.
+* The . matches any character, except newline characters.
+* \d, \w, and \s match a digit, word, or space character, respectively.
+* \D, \W, and \S match anything except a digit, word, or space character, respectively.
+* [abc] matches any character between the brackets (such as a, b, or c).
+* [^abc] matches any character that isn’t between the brackets.
+
+#### Case-Insensitive Matching
+
+But sometimes you care only about matching the letters without worrying whether they’re uppercase or lowercase. To make your regex case-insensitive, you can pass re.IGNORECASE or re.I as a second argument to re.compile(). 
+
+    >>> robocop = re.compile(r'robocop', re.I)
+
+#### The sub() Method
+
+The sub() method for Regex objects is passed two arguments. The first argument is a string to replace any matches. The second is the string for the regular expression. The sub() method returns a string with the substitutions applied.
+
+    >>> namesRegex = re.compile(r'Agent \w+')
+    >>> namesRegex.sub('CENSORED', 'Agent Alice gave the secret documents to Agent Bob.')
+    'CENSORED gave the secret documents to CENSORED.'
+
+Sometimes you may need to use the matched text itself as part of the substitution. In the first argument to sub(), you can type \1, \2, \3, and so on, to mean “Enter the text of group 1, 2, 3, and so on, in the substitution.”
+
+    >>> agentNamesRegex = re.compile(r'Agent (\w)\w*')
+    >>> agentNamesRegex.sub(r'\1****', 'Agent Alice told Agent Carol that Agent
+    Eve knew Agent Bob was a double agent.')
+    A**** told C**** that E**** knew B**** was a double agent.'
+
+#### Managing Complex Regexes
+
+You can spread the regular expression over multiple lines with comments like this:
+
+    phoneRegex = re.compile(r'''(
+        (\d{3}|\(\d{3}\))?            # area code
+        (\s|-|\.)?                    # separator
+        \d{3}                         # first 3 digits
+        (\s|-|\.)                     # separator
+        \d{4}                         # last 4 digits
+        (\s*(ext|x|ext.)\s*\d{2,5})?  # extension
+        )''', re.VERBOSE)
+
+#### Combining re.IGNORECASE, re.DOTALL, and re.VERBOSE
+
+Including all three options in the second argument will look like this:
+
+    >>> someRegexValue = re.compile('foo', re.IGNORECASE | re.DOTALL | re.VERBOSE)
 
