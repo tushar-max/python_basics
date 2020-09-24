@@ -74,3 +74,47 @@ Instead of writing the selector yourself, you can also right-click on the elemen
 ## Getting Data from an Element’s Attributes
 
 The get() method for Tag objects makes it simple to access attribute values from an element. The method is passed a string of an attribute name and returns that attribute’s value. 
+
+## Controlling the Browser with the selenium Module
+
+The selenium module lets Python directly control the browser by programmatically clicking links and filling in login information, almost as though there were a human user interacting with the page.
+
+if you need to interact with a web page in a way that, say, depends on the JavaScript code that updates the page, you’ll need to use selenium instead of requests. That’s because major ecommerce websites such as Amazon almost certainly have software systems to recognize traffic that they suspect is a script harvesting their info or signing up for multiple free accounts. These sites may refuse to serve pages to you after a while, breaking any scripts you’ve made.**The selenium module is much more likely to function on these sites long-term than requests.**
+
+## Starting a selenium-Controlled Browser
+
+The following examples will show you how to control Firefox’s web browser. If you don’t already have Firefox, you can download it for free from https://getfirefox.com/. You can install selenium by running pip install --user selenium from a command line terminal.
+
+For Firefox, go to https://github.com/mozilla/geckodriver/releases and download the geckodriver for your operating system. (“Gecko” is the name of the browser engine used in Firefox.) For example, on Windows you’ll want to download the geckodriver-v0.24.0-win64.zip link
+
+useful link: https://stackoverflow.com/questions/40208051/selenium-using-python-geckodriver-executable-needs-to-be-in-path
+
+For Chrome, go to https://sites.google.com/a/chromium.org/chromedriver/downloads and download the ZIP file for your operating system. This ZIP file will contain a chromedriver.exe (on Windows) or chromedriver (on macOS or Linux) file that you can put on your system PATH.
+
+## Finding Elements on the Page
+
+WebDriver objects have quite a few methods for finding elements on a page. They are divided into the find_element_* and find_elements_* methods. The find_element_* methods return a single WebElement object, representing the first element on the page that matches your query. The find_elements_* methods return a list of WebElement_* objects for every matching element on the page.
+
+![methods_finding_elements](/automate_boring_stuff\images\elements_seleniums_finding.png)
+
+![attributes_elements](/automate_boring_stuff\images\atributes_methods_sellenium.png
+## Clicking the Page
+
+WebElement objects returned from the find_element_* and find_elements_* methods have a click() method that simulates a mouse click on that element.
+
+## Sending Special Keys
+
+The selenium module has a module for keyboard keys that are impossible to type into a string value, which function much like escape characters. These values are stored in attributes in the selenium.webdriver.common.keys module. Since that is such a long module name, it’s much easier to run from selenium.webdriver.common.keys import Keys at the top of your program;
+
+![keys_module](/automate_boring_stuff\images\key_module_sellenium.png)
+
+## Clicking Browser Buttons
+
+The selenium module can simulate clicks on various browser buttons as well through the following methods:
+
+* browser.back() Clicks the Back button.
+* browser.forward() Clicks the Forward button.
+* browser.refresh() Clicks the Refresh/Reload button.
+* browser.quit() Clicks the Close Window button.
+
+selenium documentation at https://selenium-python.readthedocs.org/
