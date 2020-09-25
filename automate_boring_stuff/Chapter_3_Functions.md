@@ -59,3 +59,5 @@ You can put the previous divide-by-zero code in a try clause and have an except 
     print(spam(12))
     print(spam(0))
     print(spam(1))
+
+

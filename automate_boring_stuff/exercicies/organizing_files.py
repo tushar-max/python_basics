@@ -30,7 +30,7 @@ exampleZip.close()
 # Extracting
 
 exampleZip  = zipfile.ZipFile(p / "example.zip")
-# current directory is where the file of this code are.
+# current directory is where the file of this code are. 
 exampleZip.extractall()
 
 exampleZip.close()
